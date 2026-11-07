@@ -45,12 +45,12 @@ Fill this in at kickoff so every agent knows whose files are whose.
 100% Python. The frontend is a Streamlit page that calls the backend API. Each side keeps its own `requirements.txt` in its own folder.
 
 **Backend** (`backend/`)
-- `backend/app.py`: Flask app. Run with `python backend/app.py`. Listens on `http://localhost:5000`.
+- `backend/app.py`: Flask app. Run with `python backend/app.py`. Listens on `http://127.0.0.1:5000`.
 - `backend/requirements.txt`: `flask`
 
 **Frontend** (`frontend/`)
 - `frontend/app.py`: Streamlit page with two number inputs, an operation picker (+, -, *, /) and a "Calculate" button. Run with `streamlit run frontend/app.py`.
-- Reads the backend address from the `BACKEND_URL` env var, default `http://localhost:5000`.
+- Reads the backend address from the `BACKEND_URL` env var, default `http://127.0.0.1:5000`.
 - `frontend/requirements.txt`: `streamlit`, `requests`
 
 **API contract** (both sides follow this; change it only after agreeing on the board)
