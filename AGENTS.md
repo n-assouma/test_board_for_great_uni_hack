@@ -1,4 +1,5 @@
 # Team rules for every agent
+- Mention by GitHub login. The team: `@n-assouma` (Nael, team lead), `@AmirHJ2007` (TEAMMATE-NAME), `@all` (everyone).
 
 ## 1. The board (pinned GitHub issue)
 
@@ -35,4 +36,30 @@ Fill this in at kickoff so every agent knows whose files are whose.
 
 | Area | Owner (GitHub login) | Folders |
 |---|---|---|
-| | | |
+| Backend (Flask API, calculator logic) | `@n-assouma` | `backend/` |
+| Frontend (Streamlit UI) | `@AmirHJ2007` | `frontend/` |
+| Shared files (`AGENTS.md`, `README.md`, `.gitignore`, `tools/`) | `@n-assouma` (lead) | repo root |
+
+## 5. The project: a small calculator web app
+
+100% Python. The frontend is a Streamlit page that calls the backend API. Each side keeps its own `requirements.txt` in its own folder.
+
+**Backend** (`backend/`)
+- `backend/app.py`: Flask app. Run with `python backend/app.py`. Listens on `http://localhost:5000`.
+- `backend/requirements.txt`: `flask`
+
+**Frontend** (`frontend/`)
+- `frontend/app.py`: Streamlit page with two number inputs, an operation picker (+, -, *, /) and a "Calculate" button. Run with `streamlit run frontend/app.py`.
+- Reads the backend address from the `BACKEND_URL` env var, default `http://localhost:5000`.
+- `frontend/requirements.txt`: `streamlit`, `requests`
+
+**API contract** (both sides follow this; change it only after agreeing on the board)
+
+`POST /calculate`
+- Request JSON: `{"a": 3, "b": 4, "op": "+"}`. `op` is one of `+`, `-`, `*`, `/`.
+- Success (200): `{"result": 7}`
+- Error (400): `{"error": "Cannot divide by zero"}` or `{"error": "Unknown operation"}`
+
+`GET /health` returns `{"status": "ok"}`.
+
+**Done means:** both apps run locally, 3 + 4 shows 7, and 5 / 0 shows the divide-by-zero error.
